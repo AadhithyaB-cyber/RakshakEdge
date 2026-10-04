@@ -1,0 +1,81 @@
+{
+    "dataset_stats": {
+        "total_samples": 8438,
+        "train_size": 7594,
+        "val_size": 844,
+        "class_distribution_raw": {
+            "0": 0.7250533301730268,
+            "1": 0.2749466698269732
+        }
+    },
+    "training_metrics": {
+        "best_f1": 0.989247311827957,
+        "best_model_accuracy": 0.9940758293838863
+    },
+    "calibration": {
+        "optimal_threshold": 0.0027917588595300913,
+        "calibrated_precision": 0.9508196721311475,
+        "calibrated_recall": 1.0,
+        "class_weights_used": {
+            "0": 0.689604445897352,
+            "1": 1.8185344827586207
+        }
+    },
+    "robustness": [
+        {
+            "type": "URL Obfuscation",
+            "text": "Win $1000 fast! Click hxxp://scammy-link[.]com",
+            "probability": 0.9997965693473816,
+            "predicted": 1,
+            "expected": 1,
+            "passed": true
+        },
+        {
+            "type": "URL Obfuscation",
+            "text": "Your account is locked. Verify at bit.ly/secure-login-392",
+            "probability": 0.9997977614402771,
+            "predicted": 1,
+            "expected": 1,
+            "passed": true
+        },
+        {
+            "type": "Numeric Replacement",
+            "text": "W1NNER! Y0u have b33n select3d for a pr1ze.",
+            "probability": 0.9936283230781555,
+            "predicted": 1,
+            "expected": 1,
+            "passed": true
+        },
+        {
+            "type": "Mixed Case",
+            "text": "cOnGrAtUlAtIoNs, yOu WoN a FrEe iPhOnE!",
+            "probability": 0.8983756899833679,
+            "predicted": 1,
+            "expected": 1,
+            "passed": true
+        },
+        {
+            "type": "Short SMS",
+            "text": "Call me now",
+            "probability": 0.00036344866384752095,
+            "predicted": 0,
+            "expected": 1,
+            "passed": false
+        },
+        {
+            "type": "Short SMS",
+            "text": "Hey",
+            "probability": 0.0003704441187437624,
+            "predicted": 0,
+            "expected": 0,
+            "passed": true
+        }
+    ],
+    "deployment": {
+        "model_size_mb": 255.41,
+        "cpu_latency_estimate": "~10-30ms / sequence",
+        "gpu_latency_estimate": "~2-5ms / sequence",
+        "recommendation": "CPU (FastAPI wrapped, ONNX quantization recommended)"
+    },
+    "model_path": "./cipher_distilbert_detection"
+}

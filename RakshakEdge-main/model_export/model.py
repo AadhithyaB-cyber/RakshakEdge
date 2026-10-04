@@ -1,0 +1,34 @@
+# ---------------------------------------------------------------------
+# Copyright (c) 2025 Qualcomm Technologies, Inc. and/or its subsidiaries.
+# SPDX-License-Identifier: BSD-3-Clause
+# ---------------------------------------------------------------------
+
+from __future__ import annotations
+
+from transformers import AutoModelForMaskedLM, DistilBertTokenizer
+from typing_extensions import Self
+
+from qai_hub_models.models.templates.bert_hf.model import (
+    BaseBertModel,
+    untie_output_embeddings,
+)
+
+MODEL_ID = __name__.split(".")[-2]
+MODEL_ASSET_VERSION = 1
+WEIGHTS_NAME = "distilbert/distilbert-base-uncased"
+
+
+class DistilbertBase(BaseBertModel):
+    """Exportable HuggingFace Distillbert Model"""
+
+    @staticmethod
+    def default_weights() -> str:
+        return WEIGHTS_NAME
+
+    @classmethod
+    def from_pretrained(cls, weights: str = WEIGHTS_NAME) -> Self:
+        """Load HuggingFace Bert Model for Embeddings."""
+        model = AutoModelForMaskedLM.from_pretrained(weights)
+        untie_output_embeddings(model)
+        tokenizer = DistilBertTokenizer.from_pretrained(weights)
+        return cls(model, tokenizer)
